@@ -22,4 +22,10 @@ class TestISBN < Minitest::Test
 		assert_equal("0471958697", results)
 	end
 
+	def test_4_return_all_but_last
+		isbn = "7421394761"
+		results = all_but_last(isbn)
+		assert_equal("742139476", results)
+	end
+
 end
