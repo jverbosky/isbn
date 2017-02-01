@@ -28,4 +28,17 @@ class TestISBN < Minitest::Test
 		assert_equal("742139476", results)
 	end
 
+	def test_5_create_checksum
+		trimmed = "7421394761"
+		results = create_checksum(trimmed)
+		assert_equal("1", results)
+	end
+
+	def test_6_compare_checksum
+		isbn = "7421394761"
+		checksum = "1"
+		results = compare_checksum(isbn, checksum)
+		assert_equal(true, results)
+	end
+
 end
