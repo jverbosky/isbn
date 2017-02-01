@@ -29,9 +29,9 @@ class TestISBN < Minitest::Test
 	end
 
 	def test_5_create_checksum
-		trimmed = "7421394761"
+		trimmed = "742139476"
 		results = create_checksum(trimmed)
-		assert_equal("1", results)
+		assert_equal(1, results)
 	end
 
 	def test_6_compare_checksum

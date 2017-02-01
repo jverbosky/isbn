@@ -35,16 +35,29 @@ def create_checksum(trimmed)
 	results.each do |number|
 		sum += number
 	end
-	checksum = sum % 11
+	checksum = sum % 11  # integer
 end
 
 def compare_checksum(isbn, checksum)
-
+	final = isbn[-1]
+	return true if checksum.to_s == final
 end
+
+def main(isbn)
+	raw_number = output_raw_number(isbn)
+	trimmed = all_but_last(isbn)
+	checksum = create_checksum(trimmed)
+	result = compare_checksum(isbn, checksum)
+	return result
+end
+
 
 # puts output_raw_number("0-321-14653-0")
 # puts output_raw_number("877 1 95 869x")
 # puts output_raw_number("0471958697")
 # puts all_but_last("7421394761")
-puts create_checksum("742139476")
-
+# puts create_checksum("742139476")
+# puts compare_checksum("7421394761", 1)
+puts main("0-321-14653-0")
+puts main("877 1 95 869x")  # build test and logic for x = 10 (I forgot...)
+puts main("0471958697")
