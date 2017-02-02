@@ -2,7 +2,7 @@
 require "minitest/autorun"
 require_relative "isbn_check.rb"
 
-class TestISBN < Minitest::Test
+class TestIsbnCheck < Minitest::Test
 
 	def test_1_output_raw_number_source_with_hyphens
 		isbn = "0-321-14653-0"
@@ -23,21 +23,32 @@ class TestISBN < Minitest::Test
 	end
 
 	def test_4_return_all_but_last
-		isbn = "7421394761"
+		isbn = "0-321-14653-0"
 		results = all_but_last(isbn)
-		assert_equal("742139476", results)
+		assert_equal("032114653", results)
 	end
 
 	def test_5_create_checksum
-		trimmed = "742139476"
-		results = create_checksum(trimmed)
-		assert_equal(1, results)
+		isbn = "877 1 95 869x"
+		results = create_checksum(isbn)
+		assert_equal(10, results)
 	end
 
-	def test_6_compare_checksum
+	def test_6_compare_checksum_isbn_with_hyphens
+		isbn = "0-321-14653-0"
+		results = compare_checksum(isbn)
+		assert_equal(true, results)
+	end
+
+	def test_7_compare_checksum_isbn_with_spaces
+		isbn = "877 1 95 869x"
+		results = compare_checksum(isbn)
+		assert_equal(true, results)
+	end
+
+	def test_8_compare_checksum_isbn_raw
 		isbn = "7421394761"
-		checksum = "1"
-		results = compare_checksum(isbn, checksum)
+		results = compare_checksum(isbn)
 		assert_equal(true, results)
 	end
 
