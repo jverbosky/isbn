@@ -59,13 +59,13 @@ def create_checksum_isbn13(isbn)
 end
 
 def compare_checksum(isbn)
-	raw_number = output_raw_number(isbn)
-	if raw_number.length == 10
-		checksum = create_checksum_isbn10(isbn)  # run the create_checksum method to get the checksum for the isbn number
-	else
-		checksum = create_checksum_isbn13(isbn)
-	end
 	final = isbn[-1]  # use reverse indexing to get the last character from the isbn number
+	raw_number = output_raw_number(isbn)  # get the raw isbn number
+	if raw_number.length == 10  # if the number is isbn10
+		checksum = create_checksum_isbn10(isbn)  # run the isbn10 create_checksum method to get the checksum
+	else
+		checksum = create_checksum_isbn13(isbn)  # otherwise run the isbn13 create_checksum method to get the checksum
+	end
 	if final == "x"  # if the last character in the isbn number is an "x"
 		return true if checksum.to_s == "10"  # then return true if the checksum is "10" (x == 10)
 	elsif checksum.to_s == final  # if not, see if the checksum (converted to a string) equals the last character
