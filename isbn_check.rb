@@ -3,25 +3,24 @@
 # Method to convert hyphenated or space-delimited ISBN number to raw number
 def output_raw_number(isbn)
 	raw_number = []  # initialize an empty array to hold each numerical character
-	isbn_array = isbn.split("")
-	isbn_array.each do |character|
-		if character != "-"
-			if character != " "
-				raw_number.push(character)
+	isbn_array = isbn.split("")  # create an array from characters in isbn number
+	isbn_array.each do |character|  # iterate through array to check each character in isbn number
+		if character != "-"  # if the character is not a hyphen
+			if character != " "  # and if the character is not a space
+				raw_number.push(character)  # then push the character (number) to the raw_number array
 			end
 		end
 	end
-	return raw_number.join("")
+	return raw_number.join("")  # use the .join method to convert the array into a numerical string and return it
 end
 
 def all_but_last(isbn)
-	raw_number = output_raw_number(isbn)
-	trimmed = raw_number[0..-2]
-	return trimmed
+	raw_number = output_raw_number(isbn)  # run the output_raw_number method on the isbn number
+	trimmed = raw_number[0..-2]  # use reverse indexing to return all but the last number
 end
 
 def create_checksum(isbn)
-	trimmed = all_but_last(isbn)  # get all but last digit from raw isbn number
+	trimmed = all_but_last(isbn)  # run the all_but_last method to get all but the last digit from raw isbn number
 	isbn_array = trimmed.split("")  # split trimmed to create an array of numerical strings
 	digits = trimmed.length  # create a count of the number of digits in the trimmed isbn number
 	multipliers = (1..digits).to_a  # create an array of integers (1 - n) to multiple each isbn digit
@@ -39,17 +38,18 @@ def create_checksum(isbn)
 end
 
 def compare_checksum(isbn)
-	checksum = create_checksum(isbn)
-	final = isbn[-1]
-	if final == "x"
-		return true if checksum.to_s == "10"
-	elsif checksum.to_s == final
-		return true
+	checksum = create_checksum(isbn)  # run the create_checksum method to get the checksum for the isbn number
+	final = isbn[-1]  # use reverse indexing to get the last character from the isbn number
+	if final == "x"  # if the last character in the isbn number is an "x"
+		return true if checksum.to_s == "10"  # then return true if the checksum is "10" (x == 10)
+	elsif checksum.to_s == final  # if not, see if the checksum (converted to a string) equals the last character
+		return true  # and if so, then return true
 	else
-		return false
+		return false  # otherwise, return false
 	end
 end
 
+# Sandbox testing:
 # puts output_raw_number("0-321-14653-0")
 # puts output_raw_number("877 1 95 869x")
 # puts output_raw_number("0471958697")
