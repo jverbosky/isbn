@@ -22,8 +22,10 @@ end
 def create_checksum_isbn10(isbn)
 	trimmed = all_but_last(isbn)  # run the all_but_last method to get all but the last digit from raw isbn number
 	isbn_array = trimmed.split("")  # split trimmed to create an array of numerical strings
-	digits = trimmed.length  # create a count of the number of digits in the trimmed isbn number
-	multipliers = (1..digits).to_a  # create an array of integers (1 - n) to multiple each isbn digit
+
+	multipliers = (1..9).to_a  # create an array of integers (1 - 9) to multiply each isbn digit
+	# unique to isbn10
+
 	zipped = multipliers.zip(isbn_array)  # pair up each item from the isbn_array and multipliers arrays in a multi-d array
 	results = []  # initialize an empty array to hold the results from multiplying each pair of items in the zipped array
 	sum = 0  # initialize a placeholder for adding up the resulting numbers from multiplying each pair in results array
@@ -34,15 +36,20 @@ def create_checksum_isbn10(isbn)
 	results.each do |number|  # next iterate through all of the products in the results array
 		sum += number  # add each product to the accumulating sum (i.e. 0+2=2, 2+1=3, 3+4=7, 7+2=9, 9+ etc...)
 	end
+
 	isbn10_checksum = sum % 11  # create the checksum by determining the remainder of the sum divided by 11 and return it
+	# unique to isbn10
+	
 end
 
 def create_checksum_isbn13(isbn)
 	trimmed = all_but_last(isbn)  # run the all_but_last method to get all but the last digit from raw isbn number
 	isbn_array = trimmed.split("")  # split trimmed to create an array of numerical strings
-	digits = trimmed.length  # create a count of the number of digits in the trimmed isbn number
+
 	multipliers = []  # initialize an empty array to hold multipliers
 	6.times { multipliers.push(1); multipliers.push(3) }  # create a 12-element array of alternating 1s and 3s
+	# unique to isbn13
+
 	zipped = multipliers.zip(isbn_array)  # pair up each item from the isbn_array and multipliers arrays in a multi-d array
 	results = []  # initialize an empty array to hold the results from multiplying each pair of items in the zipped array
 	sum = 0  # initialize a placeholder for adding up the resulting numbers from multiplying each pair in results array
@@ -53,9 +60,12 @@ def create_checksum_isbn13(isbn)
 	results.each do |number|  # next iterate through all of the products in the results array
 		sum += number  # add each product to the accumulating sum (i.e. 0+2=2, 2+1=3, 3+4=7, 7+2=9, 9+ etc...)
 	end
+
 	remainder = sum % 10  # determine the remainder of the sum divided by 10
 	difference = 10 - remainder  # subtract the modulus from 10 to determine the difference
 	isbn13_checksum = difference % 10  # create the checksum by determining the remainder of the difference divided by 10 and return it
+	# unique to isbn13
+
 end
 
 def compare_checksum(isbn)
