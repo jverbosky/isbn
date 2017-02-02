@@ -148,4 +148,17 @@ class TestIsbnCheck < Minitest::Test
 		assert_equal(true, results)
 	end
 
+	def test_25_create_multipliers_array_isbn_10
+		multipliers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+		results = create_mutlipliers(isbn)
+		assert_equal(multipliers, results)
+	end
+
+	def test_25_create_multipliers_array_isbn_13
+		multipliers = [1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3]
+		results = create_mutlipliers(isbn)
+		assert_equal(multipliers, results)
+	end
+
+
 end
