@@ -79,51 +79,51 @@ class TestIsbnCheck < Minitest::Test
 	def test_13_create_multipliers_array_isbn_10
 		isbn = "7421394761"
 		multipliers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-		results = create_mutlipliers(isbn)
+		results = create_multipliers(isbn)
 		assert_equal(multipliers, results)
 	end
 
 	def test_14_create_multipliers_array_isbn_13
 		multipliers = [1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3]
 		isbn = "9780470059029"
-		results = create_mutlipliers(isbn)
+		results = create_multipliers(isbn)
 		assert_equal(multipliers, results)
 	end
 
-	def test_15_create_checksum_isbn10_hyphen
+	def test_15_create_sum_isbn10_hyphen
 		isbn = "0-321-14653-0"
-		results = create_checksum_isbn(isbn)
-		assert_equal(0, results)
+		results = create_sum(isbn)
+		assert_equal(154, results)
 	end
 
-	def test_16_create_checksum_isbn10_spaces
+	def test_16_create_sum_isbn10_spaces
 		isbn = "877 1 95 869x"
-		results = create_checksum_isbn(isbn)
-		assert_equal(10, results)
+		results = create_sum(isbn)
+		assert_equal(307, results)
 	end
 
-	def test_17_create_checksum_isbn10_raw
+	def test_17_create_sum_isbn10_raw
 		isbn = "0471958697"
-		results = create_checksum_isbn(isbn)
-		assert_equal(7, results)
+		results = create_sum(isbn)
+		assert_equal(293, results)
 	end
 
-	def test_18_create_checksum_isbn13_hyphen
+	def test_18_create_sum_isbn13_hyphen
 		isbn = "978-0-13-149505-0"
-		results = create_checksum_isbn(isbn)
-		assert_equal(0, results)
+		results = create_sum(isbn)
+		assert_equal(100, results)
 	end
 
-	def test_19_create_checksum_isbn13_spaces
+	def test_19_create_sum_isbn13_spaces
 		isbn = "978 0 471 48648 0"
-		results = create_checksum_isbn(isbn)
-		assert_equal(0, results)
+		results = create_sum(isbn)
+		assert_equal(130, results)
 	end
 
-	def test_20_create_checksum_isbn13_raw
+	def test_20_create_sum_isbn13_raw
 		isbn = "9780470059029"
-		results = create_checksum_isbn(isbn)
-		assert_equal(9, results)
+		results = create_sum(isbn)
+		assert_equal(101, results)
 	end
 
 	# def test_21_compare_checksum_isbn10_with_hyphens
