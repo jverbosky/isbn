@@ -2,13 +2,11 @@
 
 # Method to convert hyphenated or space-delimited ISBN number to raw number
 def output_raw_number(isbn)
-	raw_number = []
-	hyphen = "-"
-	space = " "
+	raw_number = []  # initialize an empty array to hold each numerical character
 	isbn_array = isbn.split("")
 	isbn_array.each do |character|
-		if character != hyphen
-			if character != space
+		if character != "-"
+			if character != " "
 				raw_number.push(character)
 			end
 		end
