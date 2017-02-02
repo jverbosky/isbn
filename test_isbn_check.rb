@@ -96,19 +96,19 @@ class TestIsbnCheck < Minitest::Test
 
 	def test_16_create_checksum_isbn13_hyphen
 		isbn = "978-0-13-149505-0"
-		results = create_checksum_isbn10(isbn)
+		results = create_checksum_isbn13(isbn)
 		assert_equal(0, results)
 	end
 
 	def test_17_create_checksum_isbn13_spaces
 		isbn = "978 0 471 48648 0"
-		results = create_checksum_isbn10(isbn)
+		results = create_checksum_isbn13(isbn)
 		assert_equal(0, results)
 	end
 
 	def test_18_create_checksum_isbn13_raw
 		isbn = "9780470059029"
-		results = create_checksum_isbn10(isbn)
+		results = create_checksum_isbn13(isbn)
 		assert_equal(9, results)
 	end
 
