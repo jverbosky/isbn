@@ -130,4 +130,22 @@ class TestIsbnCheck < Minitest::Test
 		assert_equal(true, results)
 	end
 
+	def test_22_compare_checksum_isbn13_with_hyphens
+		isbn = "978-0-13-149505-0"
+		results = compare_checksum(isbn)
+		assert_equal(true, results)
+	end
+
+	def test_23_compare_checksum_isbn13_with_spaces
+		isbn = "978 0 471 48648 0"
+		results = compare_checksum(isbn)
+		assert_equal(true, results)
+	end
+
+	def test_24_compare_checksum_isbn13_raw
+		isbn = "9780470059029"
+		results = compare_checksum(isbn)
+		assert_equal(true, results)
+	end
+
 end
