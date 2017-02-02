@@ -1,4 +1,4 @@
-# Program to determine if ISBN number is valid or not (true/false)
+# Program to determine if a specified ISBN number is valid or not (returns true/false)
 
 # Method to convert hyphenated or space-delimited ISBN number to raw number
 def output_raw_number(isbn)
@@ -14,11 +14,13 @@ def output_raw_number(isbn)
 	return raw_number.join("")  # use the .join method to convert the array into a numerical string and return it
 end
 
+# Method to output all digits from an ISBN number except the last one (i.e. the checksum)
 def all_but_last(isbn)
 	raw_number = output_raw_number(isbn)  # run the output_raw_number method on the isbn number
 	trimmed = raw_number[0..-2]  # use reverse indexing to return all but the last number
 end
 
+# Method to create an array of multipliers for calculating the checksum value (based on ISBN type)
 def create_multipliers(isbn)
 	raw_number = output_raw_number(isbn)  # get the raw isbn number
 	if raw_number.length == 10  # if the number is isbn10
@@ -30,6 +32,8 @@ def create_multipliers(isbn)
 	return multipliers
 end
 
+# Method to create the intermediate sum value during checksum calculation
+# This method consolidates the common statements for both ISBN types
 def create_sum(isbn)
 	trimmed = all_but_last(isbn)  # run the all_but_last method to get all but the last digit from raw isbn number
 	isbn_array = trimmed.split("")  # split trimmed to create an array of numerical strings
@@ -47,6 +51,7 @@ def create_sum(isbn)
 	return sum
 end
 
+# Method to create the checksum value for a specified ISBN10 or ISBN13 number
 def create_checksum(isbn)
 	sum = create_sum(isbn)  # run the create_sum method to calculate the intermediate sum value
 	raw_number = output_raw_number(isbn)  # get the raw isbn number
@@ -60,7 +65,8 @@ def create_checksum(isbn)
 	return checksum  # return the checksum
 end
 
-def compare_checksum(isbn)
+# Method to validate the calculated checksum value (via create_checksum) against the final digit of the ISBN number
+def valid_checksum?(isbn)
 	final = isbn[-1]  # use reverse indexing to get the last character from the isbn number
 	checksum = create_checksum(isbn)  # run the create_checksum method to calculate the corresponding checksum
 	if final == "x"  # if the last character in the isbn number is an "x"
@@ -89,18 +95,34 @@ end
 # puts all_but_last("978 0 471 48648 0")  # ISBN-13
 # puts all_but_last("9780470059029")  # ISBN-13
 
-# puts create_checksum_isbn10("0-321-14653-0")  # ISBN-10
-# puts create_checksum_isbn10("877 1 95 869x")  # ISBN-10
-# puts create_checksum_isbn10("0471958697")  # ISBN-10
-# puts create_checksum_isbn10("7421394761")  # ISBN-10
-# puts create_checksum_isbn13("978-0-13-149505-0")  # ISBN-13
-# puts create_checksum_isbn13("978 0 471 48648 0")  # ISBN-13
-# puts create_checksum_isbn13("9780470059029")  # ISBN-13
+# p create_multipliers("0-321-14653-0")  # ISBN-10
+# p create_multipliers("877 1 95 869x")  # ISBN-10
+# p create_multipliers("0471958697")  # ISBN-10
+# p create_multipliers("7421394761")  # ISBN-10
+# p create_multipliers("978-0-13-149505-0")  # ISBN-13
+# p create_multipliers("978 0 471 48648 0")  # ISBN-13
+# p create_multipliers("9780470059029")  # ISBN-13
 
-# puts compare_checksum("0-321-14653-0")  # ISBN-10
-# puts compare_checksum("877 1 95 869x")  # ISBN-10
-# puts compare_checksum("0471958697")  # ISBN-10
-# puts compare_checksum("7421394761")  # ISBN-10
-# puts compare_checksum("978-0-13-149505-0")  # ISBN-13
-# puts compare_checksum("978 0 471 48648 0")  # ISBN-13
-# puts compare_checksum("9780470059029")  # ISBN-13
+# puts create_sum("0-321-14653-0")  # ISBN-10
+# puts create_sum("877 1 95 869x")  # ISBN-10
+# puts create_sum("0471958697")  # ISBN-10
+# puts create_sum("7421394761")  # ISBN-10
+# puts create_sum("978-0-13-149505-0")  # ISBN-13
+# puts create_sum("978 0 471 48648 0")  # ISBN-13
+# puts create_sum("9780470059029")  # ISBN-13
+
+# puts create_checksum("0-321-14653-0")  # ISBN-10
+# puts create_checksum("877 1 95 869x")  # ISBN-10
+# puts create_checksum("0471958697")  # ISBN-10
+# puts create_checksum("7421394761")  # ISBN-10
+# puts create_checksum("978-0-13-149505-0")  # ISBN-13
+# puts create_checksum("978 0 471 48648 0")  # ISBN-13
+# puts create_checksum("9780470059029")  # ISBN-13
+
+# puts valid_checksum?("0-321-14653-0")  # ISBN-10
+# puts valid_checksum?("877 1 95 869x")  # ISBN-10
+# puts valid_checksum?("0471958697")  # ISBN-10
+# puts valid_checksum?("7421394761")  # ISBN-10
+# puts valid_checksum?("978-0-13-149505-0")  # ISBN-13
+# puts valid_checksum?("978 0 471 48648 0")  # ISBN-13
+# puts valid_checksum?("9780470059029")  # ISBN-13

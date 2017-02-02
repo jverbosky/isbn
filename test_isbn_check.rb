@@ -162,39 +162,39 @@ class TestIsbnCheck < Minitest::Test
 		assert_equal(9, results)
 	end
 
-	def test_21_compare_checksum_isbn10_with_hyphens
+	def test_21_validate_checksum_isbn10_with_hyphens
 		isbn = "0-321-14653-0"
-		results = compare_checksum(isbn)
+		results = valid_checksum?(isbn)
 		assert_equal(true, results)
 	end
 
-	def test_22_compare_checksum_isbn10_with_spaces
+	def test_22_validate_checksum_isbn10_with_spaces
 		isbn = "877 1 95 869x"
-		results = compare_checksum(isbn)
+		results = valid_checksum?(isbn)
 		assert_equal(true, results)
 	end
 
-	def test_23_compare_checksum_isbn10_raw
+	def test_23_validate_checksum_isbn10_raw
 		isbn = "7421394761"
-		results = compare_checksum(isbn)
+		results = valid_checksum?(isbn)
 		assert_equal(true, results)
 	end
 
-	def test_24_compare_checksum_isbn13_with_hyphens
+	def test_24_validate_checksum_isbn13_with_hyphens
 		isbn = "978-0-13-149505-0"
-		results = compare_checksum(isbn)
+		results = valid_checksum?(isbn)
 		assert_equal(true, results)
 	end
 
-	def test_25_compare_checksum_isbn13_with_spaces
+	def test_25_validate_checksum_isbn13_with_spaces
 		isbn = "978 0 471 48648 0"
-		results = compare_checksum(isbn)
+		results = valid_checksum?(isbn)
 		assert_equal(true, results)
 	end
 
-	def test_26_compare_checksum_isbn13_raw
+	def test_26_validate_checksum_isbn13_raw
 		isbn = "9780470059029"
-		results = compare_checksum(isbn)
+		results = valid_checksum?(isbn)
 		assert_equal(true, results)
 	end
 
