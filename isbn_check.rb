@@ -19,6 +19,19 @@ def all_but_last(isbn)
 	trimmed = raw_number[0..-2]  # use reverse indexing to return all but the last number
 end
 
+def create_mutlipliers(isbn)
+	raw_number = output_raw_number(isbn)  # get the raw isbn number
+	if raw_number.length == 10  # if the number is isbn10
+		multipliers = (1..9).to_a  # create an array of integers (1 - 9) to multiply each isbn digit
+	else
+		multipliers = []  # initialize an empty array to hold multipliers
+		6.times { multipliers.push(1); multipliers.push(3) }  # create a 12-element array of alternating 1s and 3s
+	end
+	return multipliers
+end
+
+
+
 def create_checksum_isbn10(isbn)
 	trimmed = all_but_last(isbn)  # run the all_but_last method to get all but the last digit from raw isbn number
 	isbn_array = trimmed.split("")  # split trimmed to create an array of numerical strings
@@ -39,7 +52,7 @@ def create_checksum_isbn10(isbn)
 
 	isbn10_checksum = sum % 11  # create the checksum by determining the remainder of the sum divided by 11 and return it
 	# unique to isbn10
-	
+
 end
 
 def create_checksum_isbn13(isbn)
