@@ -79,13 +79,13 @@ def valid_checksum?(isbn)
 end
 
 # Sandbox testing:
-# puts output_raw_number("0-321-14653-0")  # ISBN-10
-# puts output_raw_number("877 1 95 869x")  # ISBN-10
-# puts output_raw_number("0471958697")  # ISBN-10
-# puts output_raw_number("7421394761")  # ISBN-10
-# puts output_raw_number("978-0-13-149505-0")  # ISBN-13
-# puts output_raw_number("978 0 471 48648 0")  # ISBN-13
-# puts output_raw_number("9780470059029")  # ISBN-13
+puts output_raw_number("0-321-14653-0")  # ISBN-10
+puts output_raw_number("877 1 95 869x")  # ISBN-10
+puts output_raw_number("0471958697")  # ISBN-10
+puts output_raw_number("7421394761")  # ISBN-10
+puts output_raw_number("978-0-13-149505-0")  # ISBN-13
+puts output_raw_number("978 0 471 48648 0")  # ISBN-13
+puts output_raw_number("9780470059029")  # ISBN-13
 
 # puts all_but_last("0-321-14653-0")  # ISBN-10
 # puts all_but_last("877 1 95 869x")  # ISBN-10
@@ -126,3 +126,11 @@ end
 # puts valid_checksum?("978-0-13-149505-0")  # ISBN-13
 # puts valid_checksum?("978 0 471 48648 0")  # ISBN-13
 # puts valid_checksum?("9780470059029")  # ISBN-13
+
+# Bad ISBN numbers
+# puts valid_checksum?("0-3a1-14b53-0")  # ISBN-10
+# puts valid_checksum?("8f7 1 95 8e9x")  # ISBN-10  # review
+# puts valid_checksum?("047g958697")  # ISBN-10
+# puts valid_checksum?("978-0-13-149505-1")  # ISBN-13
+# puts valid_checksum?("978 0 471 48648 a")  # ISBN-13
+# puts valid_checksum?("978047005902e")  # ISBN-13
