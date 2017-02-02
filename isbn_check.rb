@@ -19,7 +19,7 @@ def all_but_last(isbn)
 	trimmed = raw_number[0..-2]  # use reverse indexing to return all but the last number
 end
 
-def create_checksum(isbn)
+def create_checksum_isbn10(isbn)
 	trimmed = all_but_last(isbn)  # run the all_but_last method to get all but the last digit from raw isbn number
 	isbn_array = trimmed.split("")  # split trimmed to create an array of numerical strings
 	digits = trimmed.length  # create a count of the number of digits in the trimmed isbn number
@@ -38,7 +38,7 @@ def create_checksum(isbn)
 end
 
 def compare_checksum(isbn)
-	checksum = create_checksum(isbn)  # run the create_checksum method to get the checksum for the isbn number
+	checksum = create_checksum_isbn10(isbn)  # run the create_checksum method to get the checksum for the isbn number
 	final = isbn[-1]  # use reverse indexing to get the last character from the isbn number
 	if final == "x"  # if the last character in the isbn number is an "x"
 		return true if checksum.to_s == "10"  # then return true if the checksum is "10" (x == 10)
@@ -50,22 +50,34 @@ def compare_checksum(isbn)
 end
 
 # Sandbox testing:
-# puts output_raw_number("0-321-14653-0")
-# puts output_raw_number("877 1 95 869x")
-# puts output_raw_number("0471958697")
-# puts output_raw_number("7421394761")
+# puts output_raw_number("0-321-14653-0")  # ISBN-10
+# puts output_raw_number("877 1 95 869x")  # ISBN-10
+# puts output_raw_number("0471958697")  # ISBN-10
+# puts output_raw_number("7421394761")  # ISBN-10
+# puts output_raw_number("978-0-13-149505-0")  # ISBN-13
+# puts output_raw_number("978 0 471 48648 0")  # ISBN-13
+# puts output_raw_number("9780470059029")  # ISBN-13
 
-# puts all_but_last("0-321-14653-0")
-# puts all_but_last("877 1 95 869x")
-# puts all_but_last("0471958697")
-# puts all_but_last("7421394761")
+# puts all_but_last("0-321-14653-0")  # ISBN-10
+# puts all_but_last("877 1 95 869x")  # ISBN-10
+# puts all_but_last("0471958697")  # ISBN-10
+# puts all_but_last("7421394761")  # ISBN-10
+# puts all_but_last("978-0-13-149505-0")  # ISBN-13
+# puts all_but_last("978 0 471 48648 0")  # ISBN-13
+# puts all_but_last("9780470059029")  # ISBN-13
 
-# puts create_checksum("0-321-14653-0")
-# puts create_checksum("877 1 95 869x")
-# puts create_checksum("0471958697")
-# puts create_checksum("7421394761")
+# puts create_checksum_isbn10("0-321-14653-0")  # ISBN-10
+# puts create_checksum_isbn10("877 1 95 869x")  # ISBN-10
+# puts create_checksum_isbn10("0471958697")  # ISBN-10
+# puts create_checksum_isbn10("7421394761")  # ISBN-10
+# puts create_checksum_isbn13("978-0-13-149505-0")  # ISBN-13
+# puts create_checksum_isbn13("978 0 471 48648 0")  # ISBN-13
+# puts create_checksum_isbn13("9780470059029")  # ISBN-13
 
-# puts compare_checksum("0-321-14653-0")
-# puts compare_checksum("877 1 95 869x")
-# puts compare_checksum("0471958697")
-# puts compare_checksum("7421394761")
+# puts compare_checksum("0-321-14653-0")  # ISBN-10
+# puts compare_checksum("877 1 95 869x")  # ISBN-10
+# puts compare_checksum("0471958697")  # ISBN-10
+# puts compare_checksum("7421394761")  # ISBN-10
+# puts compare_checksum("978-0-13-149505-0")  # ISBN-13
+# puts compare_checksum("978 0 471 48648 0")  # ISBN-13
+# puts compare_checksum("9780470059029")  # ISBN-13
