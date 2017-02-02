@@ -2,16 +2,16 @@
 
 # Method to convert hyphenated or space-delimited ISBN number to raw number
 def output_raw_number(isbn)
-	raw_number = []  # initialize an empty array to hold each numerical character
-	isbn_array = isbn.split("")  # create an array from characters in isbn number
-	isbn_array.each do |character|  # iterate through array to check each character in isbn number
-		if character != "-"  # if the character is not a hyphen
-			if character != " "  # and if the character is not a space
-				raw_number.push(character)  # then push the character (number) to the raw_number array
-			end
-		end
-	end
-	return raw_number.join("")  # use the .join method to convert the array into a numerical string and return it
+  raw_number = []  # initialize an empty array to hold each numerical character
+  isbn_array = isbn.split("")  # create an array from characters in isbn number
+  isbn_array.each do |character|  # iterate through array to check each character in isbn number
+    if character != "-"  # if the character is not a hyphen
+      if character != " "  # and if the character is not a space
+          raw_number.push(character)  # then push the character (number) to the raw_number array
+      end
+  	end
+  end
+  return raw_number.join("")  # use the .join method to convert the array into a numerical string and return it
 end
 
 # Method to output all digits from an ISBN number except the last one (i.e. the checksum)
@@ -78,14 +78,30 @@ def valid_checksum?(isbn)
 	end
 end
 
+def valid_characters?(isbn)
+    isbn_array = isbn.split("")  # create an array from characters in isbn number
+    valid_characters = "0123456789 -xX".split("")
+    invalid_character_count = 0
+    isbn_array.each do |character|  # iterate through array to check each character in isbn number
+        unless valid_characters.include?(character)
+            invalid_character_count += 1
+        end
+    end
+    if invalid_character_count > 0
+        return false
+    else
+        valid_checksum?(isbn)
+    end
+end
+
 # Sandbox testing:
-puts output_raw_number("0-321-14653-0")  # ISBN-10
-puts output_raw_number("877 1 95 869x")  # ISBN-10
-puts output_raw_number("0471958697")  # ISBN-10
-puts output_raw_number("7421394761")  # ISBN-10
-puts output_raw_number("978-0-13-149505-0")  # ISBN-13
-puts output_raw_number("978 0 471 48648 0")  # ISBN-13
-puts output_raw_number("9780470059029")  # ISBN-13
+# puts output_raw_number("0-321-14653-0")  # ISBN-10
+# puts output_raw_number("877 1 95 869x")  # ISBN-10
+# puts output_raw_number("0471958697")  # ISBN-10
+# puts output_raw_number("7421394761")  # ISBN-10
+# puts output_raw_number("978-0-13-149505-0")  # ISBN-13
+# puts output_raw_number("978 0 471 48648 0")  # ISBN-13
+# puts output_raw_number("9780470059029")  # ISBN-13
 
 # puts all_but_last("0-321-14653-0")  # ISBN-10
 # puts all_but_last("877 1 95 869x")  # ISBN-10
@@ -127,10 +143,18 @@ puts output_raw_number("9780470059029")  # ISBN-13
 # puts valid_checksum?("978 0 471 48648 0")  # ISBN-13
 # puts valid_checksum?("9780470059029")  # ISBN-13
 
+# puts valid_characters?("0-321-14653-0")  # ISBN-10
+# puts valid_characters?("877 1 95 869x")  # ISBN-10
+# puts valid_characters?("0471958697")  # ISBN-10
+# puts valid_characters?("7421394761")  # ISBN-10
+# puts valid_characters?("978-0-13-149505-0")  # ISBN-13
+# puts valid_characters?("978 0 471 48648 0")  # ISBN-13
+# puts valid_characters?("9780470059029")  # ISBN-13
+
 # Bad ISBN numbers
-# puts valid_checksum?("0-3a1-14b53-0")  # ISBN-10
-# puts valid_checksum?("8f7 1 95 8e9x")  # ISBN-10  # review
-# puts valid_checksum?("047g958697")  # ISBN-10
-# puts valid_checksum?("978-0-13-149505-1")  # ISBN-13
-# puts valid_checksum?("978 0 471 48648 a")  # ISBN-13
-# puts valid_checksum?("978047005902e")  # ISBN-13
+# puts valid_characters?("0-3a1-14b53-0")  # ISBN-10
+# puts valid_characters?("8f7 1 95 8e9x")  # ISBN-10  # review
+# puts valid_characters?("047g958697")  # ISBN-10
+# puts valid_characters?("978-0-13-149505-1")  # ISBN-13
+# puts valid_characters?("978 0 471 48648 a")  # ISBN-13
+# puts valid_characters?("978047005902e")  # ISBN-13
