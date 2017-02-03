@@ -198,52 +198,40 @@ class TestIsbnCheck < Minitest::Test
 		assert_equal(true, results)
 	end
 
-	def test_33_return_true_if_number_10_or_greater
+	def test_33_return_false_if_invalid_isbn_number_bad_checksum
 		isbn = "4780470059029"
-		results = is_too_small?(isbn)
-		assert_equal(true, results)
-	end
-
-	def test_34_return_false_if_number_less_than_10
-		isbn = "-"
-		results = is_too_small?(isbn)
+		results = valid_characters?(isbn)
 		assert_equal(false, results)
 	end
 
-	def test_35_return_true_if_all_characters_valid
-		isbn = "4780470059029"
-		results = are_characters_valid?(isbn)
-		assert_equal(true, results)
-	end
-
-	def test_36_return_false_if_all_characters_valid
+	def test_34_return_false_if_invalid_isbn_number_invalid_character
 		isbn = "0-321@14653-0"
-		results = are_characters_valid?(isbn)
+		results = valid_characters?(isbn)
 		assert_equal(false, results)
 	end
 
-	def test_37_return_true_if_no_misplaced_x
-		isbn = "4780470059029"
-		results = is_x_bad?(isbn)
-		assert_equal(true, results)
-	end
-
-	def test_38_return_false_if_x_not_last
+	def test_35_return_false_if_invalid_isbn_number_x_in_the_wrong_position
 		isbn = "877195x869"
-		results = is_x_bad?(isbn)
+		results = valid_characters?(isbn)
 		assert_equal(false, results)
 	end
 
-  def test_39_return_true_if_invalid_characters
-    count = 1
-    results = invalid_characters?(count)
-    assert_equal(true, results)
-  end
+	def test_36_return_false_if_invalid_isbn_number_empty_string
+		isbn = ""
+		results = valid_characters?(isbn)
+		assert_equal(false, results)
+	end
 
-  def test_40_return_false_if_no_invalid_characters
-    count = 0
-    results = invalid_characters?(count)
-    assert_equal(false, results)
-  end
+	def test_37_return_false_if_invalid_isbn_number_space
+		isbn = " "
+		results = valid_characters?(isbn)
+		assert_equal(false, results)
+	end
+
+	def test_38_return_false_if_invalid_isbn_number_hypen
+		isbn = "-"
+		results = valid_characters?(isbn)
+		assert_equal(false, results)
+	end
 
 end
