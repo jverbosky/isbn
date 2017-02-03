@@ -153,9 +153,9 @@ end
 # puts valid_characters?("9780470059029")  # ISBN-13
 
 # Bad ISBN numbers
-# puts valid_characters?("0-3a1-14b53-0")  # ISBN-10
-# puts valid_characters?("8f7 1 95 8e9x")  # ISBN-10  # review
-# puts valid_characters?("047g958697")  # ISBN-10
-# puts valid_characters?("978-0-13-149505-1")  # ISBN-13
-# puts valid_characters?("978 0 471 48648 a")  # ISBN-13
-# puts valid_characters?("978047005902e")  # ISBN-13
+# puts valid_characters?("4780470059029")
+# puts valid_characters?("0-321@14653-0")
+# puts valid_characters?("877195x869")
+# puts valid_characters?("")
+# puts valid_characters?(" ")
+# puts valid_characters?("-")
