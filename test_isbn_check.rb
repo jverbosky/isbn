@@ -198,51 +198,51 @@ class TestIsbnCheck < Minitest::Test
 		assert_equal(true, results)
 	end
 
-	def test_33_return_true_if_number_10_or_greater
-		isbn = "4780470059029"
-		results = is_too_small?(isbn)
-		assert_equal(true, results)
-	end
-
-	def test_34_return_false_if_number_less_than_10
-		isbn = "-"
-		results = is_too_small?(isbn)
-		assert_equal(false, results)
-	end
-
-	def test_35_return_true_if_all_characters_valid
-		isbn = "4780470059029"
-		results = are_characters_valid?(isbn)
-		assert_equal(true, results)
-	end
-
-	def test_36_return_false_if_all_characters_valid
-		isbn = "0-321@14653-0"
-		results = are_characters_valid?(isbn)
-		assert_equal(false, results)
-	end
-
-	def test_37_return_true_if_no_misplaced_x
-		isbn = "4780470059029"
-		results = is_x_bad?(isbn)
-		assert_equal(true, results)
-	end
-
-	def test_38_return_false_if_x_not_last
-		isbn = "877195x869"
-		results = is_x_bad?(isbn)
-		assert_equal(false, results)
-	end
-
-  def test_39_return_true_if_invalid_characters
+  def test_33_return_true_if_invalid_characters
     count = 1
     results = invalid_characters?(count)
     assert_equal(true, results)
   end
 
-  def test_40_return_false_if_no_invalid_characters
+  def test_34_return_false_if_no_invalid_characters
     count = 0
     results = invalid_characters?(count)
+    assert_equal(false, results)
+  end
+
+  def test_35_return_true_if_no_misplaced_x
+    isbn = "877 1 95 869x"
+    results = is_x_bad?(isbn)
+    assert_equal(true, results)
+  end
+
+  def test_36_return_false_if_x_not_last
+    isbn = "877 1 95 86x9"
+    results = is_x_bad?(isbn)
+    assert_equal(false, results)
+  end
+
+	def test_37_return_true_if_all_characters_valid
+		isbn = "978-0-13-149505-0"
+		results = are_characters_valid?(isbn)
+		assert_equal(true, results)
+	end
+
+	def test_38_return_false_if_any_characters_invalid
+		isbn = "0-321@14653-0"
+		results = are_characters_valid?(isbn)
+		assert_equal(false, results)
+	end
+
+  def test_39_return_true_if_number_10_or_greater
+    isbn = "978-0-13-149505-0"
+    results = is_too_small?(isbn)
+    assert_equal(true, results)
+  end
+
+  def test_40_return_false_if_number_less_than_10
+    isbn = "-"
+    results = is_too_small?(isbn)
     assert_equal(false, results)
   end
 
