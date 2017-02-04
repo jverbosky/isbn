@@ -35,12 +35,8 @@ def create_sum(isbn)
   zipped = create_multipliers(isbn).zip(all_but_last(isbn).split(""))
   results = []
   sum = 0
-  zipped.each do |x, y|
-    results.push(x * y.to_i)
-  end
-  results.each do |number|
-    sum += number
-  end
+  zipped.each { |x, y| results.push(x * y.to_i) }
+  results.each { |number| sum += number }
   return sum
 end
 
@@ -69,13 +65,13 @@ def valid_checksum?(isbn)
 end
 
 # Method to evaluate invalid character count in are_characters_valid() and is_x_bad?()
-def invalid_characters?(count)
-  if count > 0
-    return true
-  else
-    return false
-  end
-end
+# def invalid_characters?(count)
+#   if count > 0
+#     return true
+#   else
+#     return false
+#   end
+# end
 
 # Method to filter raw number if x is anywhere but the last character
 def is_x_bad?(isbn)
@@ -87,7 +83,7 @@ def is_x_bad?(isbn)
       break
     end
   end
-  if invalid_characters?(invalid_character_count) then return false else valid_checksum?(isbn) end
+  if invalid_character_count > 0 then return false else valid_checksum?(isbn) end
 end
 
 # Method to filter number if it contains invalid characters
@@ -101,7 +97,7 @@ def are_characters_valid?(isbn)
       break
     end
   end
-  if invalid_characters?(invalid_character_count) then return false else is_x_bad?(isbn) end
+  if invalid_character_count > 0 then return false else is_x_bad?(isbn) end
 end
 
 # !!!First method to run!!!
@@ -112,17 +108,17 @@ def is_too_small?(isbn)
 end
 
 # Sandbox testing
-# puts is_too_small?("0-321-14653-0")  # ISBN-10
-# puts is_too_small?("877 1 95 869x")  # ISBN-10
-# puts is_too_small?("0471958697")  # ISBN-10
-# puts is_too_small?("7421394761")  # ISBN-10
-# puts is_too_small?("978-0-13-149505-0")  # ISBN-13
-# puts is_too_small?("978 0 471 48648 0")  # ISBN-13
-# puts is_too_small?("9780470059029")  # ISBN-13
+puts is_too_small?("0-321-14653-0")  # ISBN-10
+puts is_too_small?("877 1 95 869x")  # ISBN-10
+puts is_too_small?("0471958697")  # ISBN-10
+puts is_too_small?("7421394761")  # ISBN-10
+puts is_too_small?("978-0-13-149505-0")  # ISBN-13
+puts is_too_small?("978 0 471 48648 0")  # ISBN-13
+puts is_too_small?("9780470059029")  # ISBN-13
 
-# puts is_too_small?("4780470059029")  # bad ISBN number
-# puts is_too_small?("0-321@14653-0")  # bad ISBN number
-# puts is_too_small?("877195x869")  # bad ISBN number
-# puts is_too_small?("")  # bad ISBN number
-# puts is_too_small?(" ")  # bad ISBN number
-# puts is_too_small?("-")  # bad ISBN number
+puts is_too_small?("4780470059029")  # bad ISBN number
+puts is_too_small?("0-321@14653-0")  # bad ISBN number
+puts is_too_small?("877195x869")  # bad ISBN number
+puts is_too_small?("")  # bad ISBN number
+puts is_too_small?(" ")  # bad ISBN number
+puts is_too_small?("-")  # bad ISBN number

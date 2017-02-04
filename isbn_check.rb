@@ -36,13 +36,11 @@ def create_sum(isbn)
   zipped = create_multipliers(isbn).zip(all_but_last(isbn).split(""))  # pair up each isbn character and multiplier in a multi-d array
   results = []  # initialize an empty array to hold the results from multiplying each pair of items in the zipped array
   sum = 0  # initialize a placeholder for adding up the resulting numbers from multiplying each pair in results array
-  zipped.each do |x, y|  # iterate through each inner array (item from isbn_array & item from multipliers array)
-    results.push(x * y.to_i)  # multiply each pair of items in the inner array and push to the results array
-  end
-  results.each do |number|  # next iterate through all of the products in the results array
-    sum += number  # add each product to the accumulating sum (i.e. 0+2=2, 2+1=3, 3+4=7, 7+2=9, 9+ etc...)
-  end
-  return sum
+  # iterate through each inner array, multiply each pair of items and push the product to the results array
+  zipped.each { |x, y| results.push(x * y.to_i) }
+  # next iterate through all of the products in the results array and add each product to the accumulating sum
+  results.each { |number| sum += number }
+  return sum  # return the sum
 end
 
 # Method to create the checksum value for a specified ISBN-10 or ISBN-13 number
@@ -69,15 +67,6 @@ def valid_checksum?(isbn)
   end
 end
 
-# Method to evaluate invalid character count in are_characters_valid() and is_x_bad?()
-def invalid_characters?(count)
-  if count > 0  # if there are any invalid characters
-    return true  # then return true
-  else
-    return false  # otherwise all characters are valid, so return false
-  end
-end
-
 # Method to filter raw number if x is anywhere but the last character
 def is_x_bad?(isbn)
   first_nine = output_raw_number(isbn).split("")[0..-2]  # create an array from first nine characters in raw isbn number
@@ -89,7 +78,7 @@ def is_x_bad?(isbn)
     end
   end
   # if x is anywhere but the last character return false, otherwise run valid_checksum?()
-  if invalid_characters?(invalid_character_count) then return false else valid_checksum?(isbn) end
+  if invalid_character_count > 0 then return false else valid_checksum?(isbn) end
 end
 
 # Method to filter number if it contains invalid characters
@@ -104,7 +93,7 @@ def are_characters_valid?(isbn)
     end
   end
   # if the number has invalid characters return false, otherwise run is_x_bad?()
-  if invalid_characters?(invalid_character_count) then return false else is_x_bad?(isbn) end
+  if invalid_character_count > 0 then return false else is_x_bad?(isbn) end
 end
 
 # !!!First method to run!!!
@@ -164,9 +153,6 @@ end
 # puts valid_checksum?("978 0 471 48648 0")  # ISBN-13
 # puts valid_checksum?("9780470059029")  # ISBN-13
 
-# puts invalid_characters?(0)  # no invalid characters = false
-# puts invalid_characters?(1)  # one invalid character = true
-
 # puts is_x_bad?("877 1 95 86x9")  # bad ISBN number
 # puts is_x_bad?("877 1 95 869x")  # ISBN-10
 
@@ -178,17 +164,17 @@ end
 # Run is_to_small?() to completely test ISBN-10 and ISBN-13 numbers #
 #####################################################################
 
-# puts is_too_small?("0-321-14653-0")  # ISBN-10
-# puts is_too_small?("877 1 95 869x")  # ISBN-10
-# puts is_too_small?("0471958697")  # ISBN-10
-# puts is_too_small?("7421394761")  # ISBN-10
-# puts is_too_small?("978-0-13-149505-0")  # ISBN-13
-# puts is_too_small?("978 0 471 48648 0")  # ISBN-13
-# puts is_too_small?("9780470059029")  # ISBN-13
+puts is_too_small?("0-321-14653-0")  # ISBN-10
+puts is_too_small?("877 1 95 869x")  # ISBN-10
+puts is_too_small?("0471958697")  # ISBN-10
+puts is_too_small?("7421394761")  # ISBN-10
+puts is_too_small?("978-0-13-149505-0")  # ISBN-13
+puts is_too_small?("978 0 471 48648 0")  # ISBN-13
+puts is_too_small?("9780470059029")  # ISBN-13
 
-# puts is_too_small?("4780470059029")  # bad ISBN number
-# puts is_too_small?("0-321@14653-0")  # bad ISBN number
-# puts is_too_small?("877195x869")  # bad ISBN number
-# puts is_too_small?("")  # bad ISBN number
-# puts is_too_small?(" ")  # bad ISBN number
-# puts is_too_small?("-")  # bad ISBN number
+puts is_too_small?("4780470059029")  # bad ISBN number
+puts is_too_small?("0-321@14653-0")  # bad ISBN number
+puts is_too_small?("877195x869")  # bad ISBN number
+puts is_too_small?("")  # bad ISBN number
+puts is_too_small?(" ")  # bad ISBN number
+puts is_too_small?("-")  # bad ISBN number
