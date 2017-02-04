@@ -64,15 +64,6 @@ def valid_checksum?(isbn)
   end
 end
 
-# Method to evaluate invalid character count in are_characters_valid() and is_x_bad?()
-# def invalid_characters?(count)
-#   if count > 0
-#     return true
-#   else
-#     return false
-#   end
-# end
-
 # Method to filter raw number if x is anywhere but the last character
 def is_x_bad?(isbn)
   first_nine = output_raw_number(isbn).split("")[0..-2]
@@ -108,17 +99,17 @@ def is_too_small?(isbn)
 end
 
 # Sandbox testing
-puts is_too_small?("0-321-14653-0")  # ISBN-10
-puts is_too_small?("877 1 95 869x")  # ISBN-10
-puts is_too_small?("0471958697")  # ISBN-10
-puts is_too_small?("7421394761")  # ISBN-10
-puts is_too_small?("978-0-13-149505-0")  # ISBN-13
-puts is_too_small?("978 0 471 48648 0")  # ISBN-13
-puts is_too_small?("9780470059029")  # ISBN-13
+# puts is_too_small?("0-321-14653-0")  # ISBN-10
+# puts is_too_small?("877 1 95 869x")  # ISBN-10
+# puts is_too_small?("0471958697")  # ISBN-10
+# puts is_too_small?("7421394761")  # ISBN-10
+# puts is_too_small?("978-0-13-149505-0")  # ISBN-13
+# puts is_too_small?("978 0 471 48648 0")  # ISBN-13
+# puts is_too_small?("9780470059029")  # ISBN-13
 
-puts is_too_small?("4780470059029")  # bad ISBN number
-puts is_too_small?("0-321@14653-0")  # bad ISBN number
-puts is_too_small?("877195x869")  # bad ISBN number
-puts is_too_small?("")  # bad ISBN number
-puts is_too_small?(" ")  # bad ISBN number
-puts is_too_small?("-")  # bad ISBN number
+# puts is_too_small?("4780470059029")  # bad ISBN number
+# puts is_too_small?("0-321@14653-0")  # bad ISBN number
+# puts is_too_small?("877195x869")  # bad ISBN number
+# puts is_too_small?("")  # bad ISBN number
+# puts is_too_small?(" ")  # bad ISBN number
+# puts is_too_small?("-")  # bad ISBN number
