@@ -95,7 +95,6 @@ end
 # !!!First method to run!!!
 # Method to filter number if it is too short to be ISBN10
 def is_too_small?(isbn)
-  isbn_array = isbn.split("")  # create an array from characters in isbn number
   # if the number is less than 10 characters long, it's not a valid isbn number
   if isbn.length < 10 then return false else are_characters_valid?(isbn) end
 end
