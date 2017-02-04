@@ -15,10 +15,10 @@ end
 
 # Method to create an array of multipliers for calculating the checksum value (based on ISBN type)
 def create_multipliers(isbn)
+  multipliers = []
   if output_raw_number(isbn).length == 10
     multipliers = (1..9).to_a
   else
-    multipliers = []
     6.times { multipliers.push(1); multipliers.push(3) }
   end
   return multipliers
