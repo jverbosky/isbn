@@ -13,11 +13,6 @@ def output_raw_number(isbn)
   return raw_number.join("")
 end
 
-# Method to output all digits from an ISBN number except the last one (i.e. the checksum)
-def all_but_last(isbn)
-  trimmed = output_raw_number(isbn)[0..-2]
-end
-
 # Method to create an array of multipliers for calculating the checksum value (based on ISBN type)
 def create_multipliers(isbn)
   if output_raw_number(isbn).length == 10
@@ -32,7 +27,8 @@ end
 # Method to create the intermediate sum value during checksum calculation
 # This method consolidates the common statements for both ISBN types
 def create_sum(isbn)
-  zipped = create_multipliers(isbn).zip(all_but_last(isbn).split(""))
+  all_but_last = output_raw_number(isbn)[0..-2]
+  zipped = create_multipliers(isbn).zip(all_but_last.split(""))
   results = []
   sum = 0
   zipped.each { |x, y| results.push(x * y.to_i) }

@@ -13,12 +13,6 @@ def output_raw_number(isbn)
   return raw_number.join("")  # use the .join method to convert the array into a numerical string and return it
 end
 
-# Method to output all digits from an ISBN number except the last one (i.e. the checksum)
-def all_but_last(isbn)
-  # run the output_raw_number method on the isbn number and use reverse indexing to return all but the last number
-  trimmed = output_raw_number(isbn)[0..-2]
-end
-
 # Method to create an array of multipliers for calculating the checksum value (based on ISBN type)
 def create_multipliers(isbn)
   if output_raw_number(isbn).length == 10  # if the number is isbn10
@@ -33,7 +27,9 @@ end
 # Method to create the intermediate sum value during checksum calculation
 # This method consolidates the common statements for both ISBN types
 def create_sum(isbn)
-  zipped = create_multipliers(isbn).zip(all_but_last(isbn).split(""))  # pair up each isbn character and multiplier in a multi-d array
+  # run the output_raw_number method on the isbn number and use reverse indexing to return all but the last number
+  all_but_last = output_raw_number(isbn)[0..-2]
+  zipped = create_multipliers(isbn).zip(all_but_last.split(""))  # pair up each isbn character and multiplier in a multi-d array
   results = []  # initialize an empty array to hold the results from multiplying each pair of items in the zipped array
   sum = 0  # initialize a placeholder for adding up the resulting numbers from multiplying each pair in results array
   # iterate through each inner array, multiply each pair of items and push the product to the results array
@@ -113,14 +109,6 @@ end
 # puts output_raw_number("978 0 471 48648 0")  # ISBN-13
 # puts output_raw_number("9780470059029")  # ISBN-13
 
-# puts all_but_last("0-321-14653-0")  # ISBN-10
-# puts all_but_last("877 1 95 869x")  # ISBN-10
-# puts all_but_last("0471958697")  # ISBN-10
-# puts all_but_last("7421394761")  # ISBN-10
-# puts all_but_last("978-0-13-149505-0")  # ISBN-13
-# puts all_but_last("978 0 471 48648 0")  # ISBN-13
-# puts all_but_last("9780470059029")  # ISBN-13
-
 # p create_multipliers("0-321-14653-0")  # ISBN-10
 # p create_multipliers("877 1 95 869x")  # ISBN-10
 # p create_multipliers("0471958697")  # ISBN-10
@@ -164,17 +152,17 @@ end
 # Run is_to_small?() to completely test ISBN-10 and ISBN-13 numbers #
 #####################################################################
 
-puts is_too_small?("0-321-14653-0")  # ISBN-10
-puts is_too_small?("877 1 95 869x")  # ISBN-10
-puts is_too_small?("0471958697")  # ISBN-10
-puts is_too_small?("7421394761")  # ISBN-10
-puts is_too_small?("978-0-13-149505-0")  # ISBN-13
-puts is_too_small?("978 0 471 48648 0")  # ISBN-13
-puts is_too_small?("9780470059029")  # ISBN-13
+# puts is_too_small?("0-321-14653-0")  # ISBN-10
+# puts is_too_small?("877 1 95 869x")  # ISBN-10
+# puts is_too_small?("0471958697")  # ISBN-10
+# puts is_too_small?("7421394761")  # ISBN-10
+# puts is_too_small?("978-0-13-149505-0")  # ISBN-13
+# puts is_too_small?("978 0 471 48648 0")  # ISBN-13
+# puts is_too_small?("9780470059029")  # ISBN-13
 
-puts is_too_small?("4780470059029")  # bad ISBN number
-puts is_too_small?("0-321@14653-0")  # bad ISBN number
-puts is_too_small?("877195x869")  # bad ISBN number
-puts is_too_small?("")  # bad ISBN number
-puts is_too_small?(" ")  # bad ISBN number
-puts is_too_small?("-")  # bad ISBN number
+# puts is_too_small?("4780470059029")  # bad ISBN number
+# puts is_too_small?("0-321@14653-0")  # bad ISBN number
+# puts is_too_small?("877195x869")  # bad ISBN number
+# puts is_too_small?("")  # bad ISBN number
+# puts is_too_small?(" ")  # bad ISBN number
+# puts is_too_small?("-")  # bad ISBN number

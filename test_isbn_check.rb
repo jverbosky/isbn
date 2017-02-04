@@ -40,195 +40,159 @@ class TestIsbnCheck < Minitest::Test
 		assert_equal("9780470059029", results)
 	end
 
-	def test_7_return_all_but_last_isbn10_hyphens
-		isbn = "0-321-14653-0"
-		results = all_but_last(isbn)
-		assert_equal("032114653", results)
-	end
-
-	def test_8_return_all_but_last_isbn10_spaces
-		isbn = "877 1 95 869x"
-		results = all_but_last(isbn)
-		assert_equal("877195869", results)
-	end
-
-		def test_9_return_all_but_last_isbn10_raw
-		isbn = "0471958697"
-		results = all_but_last(isbn)
-		assert_equal("047195869", results)
-	end
-
-	def test_10_return_all_but_last_isbn13_hyphens
-		isbn = "978-0-13-149505-0"
-		results = all_but_last(isbn)
-		assert_equal("978013149505", results)
-	end
-
-	def test_11_return_all_but_last_isbn13_spaces
-		isbn = "978 0 471 48648 0"
-		results = all_but_last(isbn)
-		assert_equal("978047148648", results)
-	end
-
-	def test_12_return_all_but_last_isbn13_raw
-		isbn = "9780470059029"
-		results = all_but_last(isbn)
-		assert_equal("978047005902", results)
-	end
-
-	def test_13_create_multipliers_array_isbn_10
+	def test_7_create_multipliers_array_isbn_10
 		isbn = "7421394761"
 		multipliers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 		results = create_multipliers(isbn)
 		assert_equal(multipliers, results)
 	end
 
-	def test_14_create_multipliers_array_isbn_13
+	def test_8_create_multipliers_array_isbn_13
 		multipliers = [1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3]
 		isbn = "9780470059029"
 		results = create_multipliers(isbn)
 		assert_equal(multipliers, results)
 	end
 
-	def test_15_create_sum_isbn10_hyphen
+	def test_9_create_sum_isbn10_hyphen
 		isbn = "0-321-14653-0"
 		results = create_sum(isbn)
 		assert_equal(154, results)
 	end
 
-	def test_16_create_sum_isbn10_spaces
+	def test_10_create_sum_isbn10_spaces
 		isbn = "877 1 95 869x"
 		results = create_sum(isbn)
 		assert_equal(307, results)
 	end
 
-	def test_17_create_sum_isbn10_raw
+	def test_11_create_sum_isbn10_raw
 		isbn = "0471958697"
 		results = create_sum(isbn)
 		assert_equal(293, results)
 	end
 
-	def test_18_create_sum_isbn13_hyphen
+	def test_12_create_sum_isbn13_hyphen
 		isbn = "978-0-13-149505-0"
 		results = create_sum(isbn)
 		assert_equal(100, results)
 	end
 
-	def test_19_create_sum_isbn13_spaces
+	def test_13_create_sum_isbn13_spaces
 		isbn = "978 0 471 48648 0"
 		results = create_sum(isbn)
 		assert_equal(130, results)
 	end
 
-	def test_20_create_sum_isbn13_raw
+	def test_14_create_sum_isbn13_raw
 		isbn = "9780470059029"
 		results = create_sum(isbn)
 		assert_equal(101, results)
 	end
 
-	def test_21_create_checksum_isbn10_hyphen
+	def test_15_create_checksum_isbn10_hyphen
 		isbn = "0-321-14653-0"
 		results = create_checksum(isbn)
 		assert_equal(0, results)
 	end
 
-	def test_22_create_checksum_isbn10_spaces
+	def test_16_create_checksum_isbn10_spaces
 		isbn = "877 1 95 869x"
 		results = create_checksum(isbn)
 		assert_equal(10, results)
 	end
 
-	def test_23_create_checksum_isbn10_raw
+	def test_17_create_checksum_isbn10_raw
 		isbn = "0471958697"
 		results = create_checksum(isbn)
 		assert_equal(7, results)
 	end
 
-	def test_24_create_checksum_isbn13_hyphen
+	def test_18_create_checksum_isbn13_hyphen
 		isbn = "978-0-13-149505-0"
 		results = create_checksum(isbn)
 		assert_equal(0, results)
 	end
 
-	def test_25_create_checksum_isbn13_spaces
+	def test_19_create_checksum_isbn13_spaces
 		isbn = "978 0 471 48648 0"
 		results = create_checksum(isbn)
 		assert_equal(0, results)
 	end
 
-	def test_26_create_checksum_isbn13_raw
+	def test_20_create_checksum_isbn13_raw
 		isbn = "9780470059029"
 		results = create_checksum(isbn)
 		assert_equal(9, results)
 	end
 
-	def test_27_validate_checksum_isbn10_with_hyphens
+	def test_21_validate_checksum_isbn10_with_hyphens
 		isbn = "0-321-14653-0"
 		results = valid_checksum?(isbn)
 		assert_equal(true, results)
 	end
 
-	def test_28_validate_checksum_isbn10_with_spaces
+	def test_22_validate_checksum_isbn10_with_spaces
 		isbn = "877 1 95 869x"
 		results = valid_checksum?(isbn)
 		assert_equal(true, results)
 	end
 
-	def test_29_validate_checksum_isbn10_raw
+	def test_23_validate_checksum_isbn10_raw
 		isbn = "7421394761"
 		results = valid_checksum?(isbn)
 		assert_equal(true, results)
 	end
 
-	def test_30_validate_checksum_isbn13_with_hyphens
+	def test_24_validate_checksum_isbn13_with_hyphens
 		isbn = "978-0-13-149505-0"
 		results = valid_checksum?(isbn)
 		assert_equal(true, results)
 	end
 
-	def test_31_validate_checksum_isbn13_with_spaces
+	def test_25_validate_checksum_isbn13_with_spaces
 		isbn = "978 0 471 48648 0"
 		results = valid_checksum?(isbn)
 		assert_equal(true, results)
 	end
 
-	def test_32_validate_checksum_isbn13_raw
+	def test_26_validate_checksum_isbn13_raw
 		isbn = "9780470059029"
 		results = valid_checksum?(isbn)
 		assert_equal(true, results)
 	end
 
-  def test_33_return_true_if_no_misplaced_x
+  def test_27_return_true_if_no_misplaced_x
     isbn = "877 1 95 869x"
     results = is_x_bad?(isbn)
     assert_equal(true, results)
   end
 
-  def test_34_return_false_if_x_not_last
+  def test_28_return_false_if_x_not_last
     isbn = "877 1 95 86x9"
     results = is_x_bad?(isbn)
     assert_equal(false, results)
   end
 
-	def test_35_return_true_if_all_characters_valid
+	def test_29_return_true_if_all_characters_valid
 		isbn = "978-0-13-149505-0"
 		results = are_characters_valid?(isbn)
 		assert_equal(true, results)
 	end
 
-	def test_36_return_false_if_any_characters_invalid
+	def test_30_return_false_if_any_characters_invalid
 		isbn = "0-321@14653-0"
 		results = are_characters_valid?(isbn)
 		assert_equal(false, results)
 	end
 
-  def test_37_return_true_if_number_10_or_greater
+  def test_31_return_true_if_number_10_or_greater
     isbn = "978-0-13-149505-0"
     results = is_too_small?(isbn)
     assert_equal(true, results)
   end
 
-  def test_38_return_false_if_number_less_than_10
+  def test_32_return_false_if_number_less_than_10
     isbn = "-"
     results = is_too_small?(isbn)
     assert_equal(false, results)
