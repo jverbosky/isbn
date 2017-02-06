@@ -143,17 +143,17 @@ end
 # Run is_to_small?() to completely test ISBN-10 and ISBN-13 numbers #
 #####################################################################
 
-puts is_too_small?("0-321-14653-0")  # ISBN-10
-puts is_too_small?("877 1 95 869x")  # ISBN-10
-puts is_too_small?("0471958697")  # ISBN-10
-puts is_too_small?("7421394761")  # ISBN-10
-puts is_too_small?("978-0-13-149505-0")  # ISBN-13
-puts is_too_small?("978 0 471 48648 0")  # ISBN-13
-puts is_too_small?("9780470059029")  # ISBN-13
+# puts is_too_small?("0-321-14653-0")  # ISBN-10
+# puts is_too_small?("877 1 95 869x")  # ISBN-10
+# puts is_too_small?("0471958697")  # ISBN-10
+# puts is_too_small?("7421394761")  # ISBN-10
+# puts is_too_small?("978-0-13-149505-0")  # ISBN-13
+# puts is_too_small?("978 0 471 48648 0")  # ISBN-13
+# puts is_too_small?("9780470059029")  # ISBN-13
 
-puts is_too_small?("4780470059029")  # bad ISBN number
-puts is_too_small?("0-321@14653-0")  # bad ISBN number
-puts is_too_small?("877195x869")  # bad ISBN number
-puts is_too_small?("")  # bad ISBN number
-puts is_too_small?(" ")  # bad ISBN number
-puts is_too_small?("-")  # bad ISBN number
+# puts is_too_small?("4780470059029")  # bad ISBN number
+# puts is_too_small?("0-321@14653-0")  # bad ISBN number
+# puts is_too_small?("877195x869")  # bad ISBN number
+# puts is_too_small?("")  # bad ISBN number
+# puts is_too_small?(" ")  # bad ISBN number
+# puts is_too_small?("-")  # bad ISBN number

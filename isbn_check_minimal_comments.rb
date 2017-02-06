@@ -83,9 +83,9 @@ end
 # puts is_too_small?("978 0 471 48648 0")  # ISBN-13
 # puts is_too_small?("9780470059029")  # ISBN-13
 
-puts is_too_small?("4780470059029")  # bad ISBN number
-puts is_too_small?("0-321@14653-0")  # bad ISBN number
-puts is_too_small?("877195x869")  # bad ISBN number
-puts is_too_small?("")  # bad ISBN number
-puts is_too_small?(" ")  # bad ISBN number
-puts is_too_small?("-")  # bad ISBN number
+# puts is_too_small?("4780470059029")  # bad ISBN number
+# puts is_too_small?("0-321@14653-0")  # bad ISBN number
+# puts is_too_small?("877195x869")  # bad ISBN number
+# puts is_too_small?("")  # bad ISBN number
+# puts is_too_small?(" ")  # bad ISBN number
+# puts is_too_small?("-")  # bad ISBN number
