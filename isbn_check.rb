@@ -6,9 +6,8 @@ def output_raw_number(isbn)
   raw_number = []  # initialize an empty array to hold each numerical character
   isbn_array = isbn.split("")  # create an array from characters in isbn number
   isbn_array.each do |character|  # iterate through array to check each character in isbn number
-    if character != "-" && character != " "   # if the character is not a hyphen or a space
-      raw_number.push(character)  # then push the character (number) to the raw_number array
-    end
+    # if the character is not a hyphen or a space then push the character (number) to the raw_number array
+    if character != "-" && character != " " then raw_number.push(character) end
   end
   return raw_number.join("")  # use the .join method to convert the array into a numerical string and return it
 end
@@ -16,10 +15,10 @@ end
 # Method to create an array of multipliers for calculating the checksum value (based on ISBN type)
 def create_multipliers(isbn)
   multipliers = []  # initialize an empty array to hold multipliers
-  if output_raw_number(isbn).length == 10  # if the number is isbn10
-    multipliers = (1..9).to_a  # create an array of integers (1 - 9) to multiply each isbn digit
-  else
-    6.times { multipliers.push(1); multipliers.push(3) }  # create a 12-element array of alternating 1s and 3s
+  # if the number is isbn10 create an array of integers (1 - 9) to multiply each isbn digit
+  if output_raw_number(isbn).length == 10 then multipliers = (1..9).to_a
+    # otherwise it's isbn13 so create a 12-element array of alternating 1s and 3s
+    else 6.times { multipliers.push(1); multipliers.push(3) }
   end
   return multipliers
 end
@@ -42,10 +41,10 @@ end
 # Method to create the checksum value for a specified ISBN-10 or ISBN-13 number
 def create_checksum(isbn)
   sum = create_sum(isbn)  # run the create_sum method to calculate the intermediate sum value
-  if output_raw_number(isbn).length == 10  # if the number is isbn10
-    checksum = sum % 11  # create the ISBN-10 checksum
-  else  # otherwise the number is isbn13
-    checksum = (10 - (sum % 10)) % 10 # create the ISBN-13 checksum
+  # if the number is isbn10 create the ISBN-10 checksum
+  if output_raw_number(isbn).length == 10 then checksum = sum % 11
+    # otherwise the number is isbn13 so create the ISBN-13 checksum
+    else checksum = (10 - (sum % 10)) % 10
   end
   return checksum  # return the checksum
 end
@@ -54,12 +53,12 @@ end
 def valid_checksum?(isbn)
   final = isbn[-1]  # use reverse indexing to get the last character from the isbn number
   checksum = create_checksum(isbn)  # run the create_checksum method to calculate the corresponding checksum
-  if final == "x"  # if the last character in the isbn number is an "x"
-    return true if checksum.to_s == "10"  # then return true if the checksum is "10" (x == 10)
-  elsif checksum.to_s == final  # if not, see if the checksum (converted to a string) equals the last character
-    return true  # and if so, then return true
-  else
-    return false  # otherwise, return false
+  # if the last character in the isbn number is an "x" then return true if the checksum is "10" (x == 10)
+  if final == "x" then return true if checksum.to_s == "10"
+    # if not, see if the checksum (converted to a string) equals the last character and if so, then return true
+    elsif checksum.to_s == final then return true
+    # otherwise, return false
+    else return false
   end
 end
 
@@ -68,10 +67,9 @@ def is_x_bad?(isbn)
   first_nine = output_raw_number(isbn).split("")[0..-2]  # create an array from first nine characters in raw isbn number
   invalid_character_count = 0  # counter for invalid characters
   first_nine.each do |character|  # iterate through array to check each character in the first nine
-    if character == "x" || character == "X"  # if the current character is an x/X
-      invalid_character_count += 1  # then increment the invalid character counter
-      break  # since one invalid character is enough, break if we find one to save cycles
-    end
+      # if the current character is an x/X then increment the invalid character counter
+      # and since one invalid character is enough, break if we find one to save cycles
+    if character == "x" || character == "X" then invalid_character_count += 1; break end
   end
   # if x is anywhere but the last character return false, otherwise run valid_checksum?()
   if invalid_character_count > 0 then return false else valid_checksum?(isbn) end
@@ -83,10 +81,9 @@ def are_characters_valid?(isbn)
   valid_characters = "0123456789 -xX".split("")  # create an array of valid isbn number characters
   invalid_character_count = 0  # counter for invalid characters
   isbn_array.each do |character|  # iterate through array to check each character in isbn number
-    unless valid_characters.include?(character)  # if the current character is not in the valid characters array
-      invalid_character_count += 1  # then increment the invalid character counter
-      break  # since one invalid character is enough, break if we find one to save cycles
-    end
+    # if the current character is not in the valid characters array then increment the invalid character counter
+    # and since one invalid character is enough, break if we find one to save cycles
+    unless valid_characters.include?(character) then invalid_character_count += 1; break end
   end
   # if the number has invalid characters return false, otherwise run is_x_bad?()
   if invalid_character_count > 0 then return false else is_x_bad?(isbn) end

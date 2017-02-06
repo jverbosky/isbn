@@ -6,9 +6,7 @@ def output_raw_number(isbn)
   raw_number = []
   isbn_array = isbn.split("")
   isbn_array.each do |character|
-    if character != "-" && character != " "
-      raw_number.push(character)
-    end
+    if character != "-" && character != " " then raw_number.push(character) end
   end
   return raw_number.join("")
 end
@@ -16,10 +14,8 @@ end
 # Method to create an array of multipliers for calculating the checksum value (based on ISBN type)
 def create_multipliers(isbn)
   multipliers = []
-  if output_raw_number(isbn).length == 10
-    multipliers = (1..9).to_a
-  else
-    6.times { multipliers.push(1); multipliers.push(3) }
+  if output_raw_number(isbn).length == 10 then multipliers = (1..9).to_a
+    else 6.times { multipliers.push(1); multipliers.push(3) }
   end
   return multipliers
 end
@@ -39,10 +35,8 @@ end
 # Method to create the checksum value for a specified ISBN-10 or ISBN-13 number
 def create_checksum(isbn)
   sum = create_sum(isbn)
-  if output_raw_number(isbn).length == 10
-    checksum = sum % 11
-  else
-    checksum = (10 - (sum % 10)) % 10
+  if output_raw_number(isbn).length == 10 then checksum = sum % 11
+    else checksum = (10 - (sum % 10)) % 10
   end
   return checksum
 end
@@ -51,12 +45,9 @@ end
 def valid_checksum?(isbn)
   final = isbn[-1]
   checksum = create_checksum(isbn)
-  if final == "x"
-    return true if checksum.to_s == "10"
-  elsif checksum.to_s == final
-    return true
-  else
-    return false
+  if final == "x" then return true if checksum.to_s == "10"
+    elsif checksum.to_s == final then return true
+    else return false
   end
 end
 
@@ -65,10 +56,7 @@ def is_x_bad?(isbn)
   first_nine = output_raw_number(isbn).split("")[0..-2]
   invalid_character_count = 0
   first_nine.each do |character|
-    if character == "x" || character == "X"
-      invalid_character_count += 1
-      break
-    end
+    if character == "x" || character == "X" then invalid_character_count += 1; break end
   end
   if invalid_character_count > 0 then return false else valid_checksum?(isbn) end
 end
@@ -79,10 +67,7 @@ def are_characters_valid?(isbn)
   valid_characters = "0123456789 -xX".split("")
   invalid_character_count = 0
   isbn_array.each do |character|
-    unless valid_characters.include?(character)
-      invalid_character_count += 1
-      break
-    end
+    unless valid_characters.include?(character) then invalid_character_count += 1; break end
   end
   if invalid_character_count > 0 then return false else is_x_bad?(isbn) end
 end

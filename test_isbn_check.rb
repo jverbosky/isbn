@@ -1,7 +1,7 @@
 
 require "minitest/autorun"
-require_relative "isbn_check.rb"
-#require_relative "isbn_check_minimal_comments.rb"
+#require_relative "isbn_check.rb"
+require_relative "isbn_check_minimal_comments.rb"
 
 class TestIsbnCheck < Minitest::Test
 
