@@ -6,7 +6,7 @@ def output_raw_number(isbn)
   raw_number = []
   isbn_array = isbn.split("")
   isbn_array.each do |character|
-    if character != "-" && character != " " then raw_number.push(character) end
+    raw_number.push(character) if character != "-" && character != " "
   end
   return raw_number.join("")
 end
@@ -14,9 +14,7 @@ end
 # Method to create an array of multipliers for calculating the checksum value (based on ISBN type)
 def create_multipliers(isbn)
   multipliers = []
-  if output_raw_number(isbn).length == 10 then multipliers = (1..9).to_a
-    else 6.times { multipliers.push(1); multipliers.push(3) }
-  end
+  output_raw_number(isbn).length == 10 ? (multipliers = (1..9).to_a) : 6.times { multipliers.push(1); multipliers.push(3) }
   return multipliers
 end
 
@@ -35,9 +33,7 @@ end
 # Method to create the checksum value for a specified ISBN-10 or ISBN-13 number
 def create_checksum(isbn)
   sum = create_sum(isbn)
-  if output_raw_number(isbn).length == 10 then checksum = sum % 11
-    else checksum = (10 - (sum % 10)) % 10
-  end
+  output_raw_number(isbn).length == 10 ? (checksum = sum % 11) : (checksum = (10 - (sum % 10)) % 10)
   return checksum
 end
 
@@ -58,7 +54,7 @@ def is_x_bad?(isbn)
   first_nine.each do |character|
     if character == "x" || character == "X" then invalid_character_count += 1; break end
   end
-  if invalid_character_count > 0 then return false else valid_checksum?(isbn) end
+  invalid_character_count > 0 ? (return false) : valid_checksum?(isbn)
 end
 
 # Method to filter number if it contains invalid characters
@@ -69,13 +65,13 @@ def are_characters_valid?(isbn)
   isbn_array.each do |character|
     unless valid_characters.include?(character) then invalid_character_count += 1; break end
   end
-  if invalid_character_count > 0 then return false else is_x_bad?(isbn) end
+  invalid_character_count > 0 ? (return false) : is_x_bad?(isbn)
 end
 
 # !!!First method to run!!!
 # Method to filter number if it is too short to be ISBN10
 def is_too_small?(isbn)
-  if isbn.length < 10 then return false else are_characters_valid?(isbn) end
+  isbn.length < 10 ? (return false) : are_characters_valid?(isbn)
 end
 
 # Sandbox testing
@@ -87,9 +83,9 @@ end
 # puts is_too_small?("978 0 471 48648 0")  # ISBN-13
 # puts is_too_small?("9780470059029")  # ISBN-13
 
-# puts is_too_small?("4780470059029")  # bad ISBN number
-# puts is_too_small?("0-321@14653-0")  # bad ISBN number
-# puts is_too_small?("877195x869")  # bad ISBN number
-# puts is_too_small?("")  # bad ISBN number
-# puts is_too_small?(" ")  # bad ISBN number
-# puts is_too_small?("-")  # bad ISBN number
+puts is_too_small?("4780470059029")  # bad ISBN number
+puts is_too_small?("0-321@14653-0")  # bad ISBN number
+puts is_too_small?("877195x869")  # bad ISBN number
+puts is_too_small?("")  # bad ISBN number
+puts is_too_small?(" ")  # bad ISBN number
+puts is_too_small?("-")  # bad ISBN number

@@ -7,7 +7,7 @@ def output_raw_number(isbn)
   isbn_array = isbn.split("")  # create an array from characters in isbn number
   isbn_array.each do |character|  # iterate through array to check each character in isbn number
     # if the character is not a hyphen or a space then push the character (number) to the raw_number array
-    if character != "-" && character != " " then raw_number.push(character) end
+    raw_number.push(character) if character != "-" && character != " "
   end
   return raw_number.join("")  # use the .join method to convert the array into a numerical string and return it
 end
@@ -16,10 +16,8 @@ end
 def create_multipliers(isbn)
   multipliers = []  # initialize an empty array to hold multipliers
   # if the number is isbn10 create an array of integers (1 - 9) to multiply each isbn digit
-  if output_raw_number(isbn).length == 10 then multipliers = (1..9).to_a
-    # otherwise it's isbn13 so create a 12-element array of alternating 1s and 3s
-    else 6.times { multipliers.push(1); multipliers.push(3) }
-  end
+  # otherwise it's isbn13 so create a 12-element array of alternating 1s and 3s
+  output_raw_number(isbn).length == 10 ? (multipliers = (1..9).to_a) : 6.times { multipliers.push(1); multipliers.push(3) }
   return multipliers
 end
 
@@ -41,11 +39,8 @@ end
 # Method to create the checksum value for a specified ISBN-10 or ISBN-13 number
 def create_checksum(isbn)
   sum = create_sum(isbn)  # run the create_sum method to calculate the intermediate sum value
-  # if the number is isbn10 create the ISBN-10 checksum
-  if output_raw_number(isbn).length == 10 then checksum = sum % 11
-    # otherwise the number is isbn13 so create the ISBN-13 checksum
-    else checksum = (10 - (sum % 10)) % 10
-  end
+  # if the number is isbn10 create the ISBN-10 checksum, 0therwise the number is isbn13 so create the ISBN-13 checksum
+  output_raw_number(isbn).length == 10 ? (checksum = sum % 11) : (checksum = (10 - (sum % 10)) % 10)
   return checksum  # return the checksum
 end
 
@@ -93,7 +88,7 @@ end
 # Method to filter number if it is too short to be ISBN10
 def is_too_small?(isbn)
   # if the number is less than 10 characters long, it's not a valid isbn number
-  if isbn.length < 10 then return false else are_characters_valid?(isbn) end
+  isbn.length < 10 ? (return false) : are_characters_valid?(isbn)
 end
 
 # Sandbox testing:
@@ -148,17 +143,17 @@ end
 # Run is_to_small?() to completely test ISBN-10 and ISBN-13 numbers #
 #####################################################################
 
-# puts is_too_small?("0-321-14653-0")  # ISBN-10
-# puts is_too_small?("877 1 95 869x")  # ISBN-10
-# puts is_too_small?("0471958697")  # ISBN-10
-# puts is_too_small?("7421394761")  # ISBN-10
-# puts is_too_small?("978-0-13-149505-0")  # ISBN-13
-# puts is_too_small?("978 0 471 48648 0")  # ISBN-13
-# puts is_too_small?("9780470059029")  # ISBN-13
+puts is_too_small?("0-321-14653-0")  # ISBN-10
+puts is_too_small?("877 1 95 869x")  # ISBN-10
+puts is_too_small?("0471958697")  # ISBN-10
+puts is_too_small?("7421394761")  # ISBN-10
+puts is_too_small?("978-0-13-149505-0")  # ISBN-13
+puts is_too_small?("978 0 471 48648 0")  # ISBN-13
+puts is_too_small?("9780470059029")  # ISBN-13
 
-# puts is_too_small?("4780470059029")  # bad ISBN number
-# puts is_too_small?("0-321@14653-0")  # bad ISBN number
-# puts is_too_small?("877195x869")  # bad ISBN number
-# puts is_too_small?("")  # bad ISBN number
-# puts is_too_small?(" ")  # bad ISBN number
-# puts is_too_small?("-")  # bad ISBN number
+puts is_too_small?("4780470059029")  # bad ISBN number
+puts is_too_small?("0-321@14653-0")  # bad ISBN number
+puts is_too_small?("877195x869")  # bad ISBN number
+puts is_too_small?("")  # bad ISBN number
+puts is_too_small?(" ")  # bad ISBN number
+puts is_too_small?("-")  # bad ISBN number
