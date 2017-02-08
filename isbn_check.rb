@@ -11,7 +11,7 @@ def create_multipliers(isbn)
   multipliers = []  # initialize an empty array to hold multipliers
   # if the number is isbn10 create an array of integers (1 - 9) to multiply each isbn digit
   # otherwise it's isbn13 so create a 12-element array of alternating 1s and 3s
-  output_raw_number(isbn).length == 10 ? (multipliers = (1..9).to_a) : 6.times { multipliers.push(1); multipliers.push(3) }
+  output_raw_number(isbn).length == 10 ? (multipliers = (1..9).to_a) : 6.times { multipliers.push(1, 3) }
   return multipliers
 end
 
