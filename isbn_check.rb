@@ -3,7 +3,7 @@
 
 # Method to convert hyphenated or space-delimited ISBN number to raw number
 def output_raw_number(isbn)
-    isbn.delete " -"
+    isbn.delete " -"  # the intersection (difference) of the number and delimiting characters
 end
 
 # Method to create an array of multipliers for calculating the checksum value (based on ISBN type)
