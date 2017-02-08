@@ -1,7 +1,7 @@
 # Program to determine if a specified ISBN number is valid or not (returns true/false)
 
 def output_raw_number(isbn)
-  isbn.delete("-" " ")
+  isbn.delete " -"
 end
 
 def create_multipliers(isbn)
