@@ -3,17 +3,28 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title><%= @title %></title>   <!-- using instance variable for title -->
+    <title>ISBN Validator</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="styles.css">
-    <!--<link rel="stylesheet" href="styles.css">-->  <!-- link to the CSS stylesheet -->
   </head>
   <body>
   <header>
     <h1><%= @title %></h1>   <!-- using instance variable for title -->
   </header>
   <section>
-    <h3>Please enter an ISBN number to evaluate:</h3>
+    <div class="row">
+      <div class="column c1">
+        <img src="/images/i.png" alt="Whoops - image failed to load...">
+      </div>
+      <div class="column c2">
+        <h3>Please enter an ISBN number to evaluate:</h3>
+        <form method="post" action="isbn_results">  <!-- action corresponds to post item in app.rb -->
+          <!-- "text" type == string, "ISBN" is the variable that you can access from app.rb -->
+          <input type="text" name="ISBN">
+          <input type="submit">  <!-- creates a button to submit form data -->
+        </form>
+      </div>
+    </div>
     <%= yield %>  <!-- load unique content from other .erb files -->
   </section>
   </body>

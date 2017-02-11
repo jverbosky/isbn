@@ -3,16 +3,36 @@ body {
   background-color: #d0d0d0;
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 }
+
 /*div {
   display: table;
   margin: 0 auto;
   max-width: 1280px;
 }*/
+
 h1 {
   font-size: 36px;
   text-align: center;
   color: #405eae;
 }
+
+.row {
+  display: table;
+  border-spacing: 10px;
+}
+
+.column {
+  display: table-cell;
+}
+
+.c1 {
+  background-color: #00ff00;
+}
+
+.c2 {
+  background-color: #0000ff;
+}
+
 /*h3 {
   text-align: center;
   color: rgb(136, 0, 21);

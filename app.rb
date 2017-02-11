@@ -10,10 +10,10 @@ get '/' do
   erb :isbn_input  # load ERB (HTML) file from /views directory
 end
 
-post '/isbn_input' do  # access input from isbn_input.erb
+post '/isbn_results' do  # access input from form action
   @title = "ISBN Validator Results"  # instance variable for page name and header
-  num = params[:ISBN]  # access input from .erb form's text input (name="ISBN")
-  # results =   # pass num to main method from isbn_check.rb
-  is_too_small?(num) ? "\"#{num}\" is a valid ISBN number." : "\"#{num}\" is not a valid ISBN number."
-  #  "This is a valid ISBN number: #{results}"
+  @num = params[:ISBN]  # access input from .erb form's text input (name="ISBN")
+  @result = is_too_small?(@num) ? "Congratulations!" : "Sorry..."  # conditional text
+  @valid = is_too_small?(@num) ? "a valid ISBN number." : "not a valid ISBN number."  # more conditional text
+  erb :isbn_status
 end
