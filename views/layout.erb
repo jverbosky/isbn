@@ -1,0 +1,20 @@
+<!-- views/layout.erb -->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title><%= @title %></title>   <!-- using instance variable for title -->
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="styles.css">
+    <!--<link rel="stylesheet" href="styles.css">-->  <!-- link to the CSS stylesheet -->
+  </head>
+  <body>
+  <header>
+    <h1><%= @title %></h1>   <!-- using instance variable for title -->
+  </header>
+  <section>
+    <h3>Please enter an ISBN number to evaluate:</h3>
+    <%= yield %>  <!-- load unique content from other .erb files -->
+  </section>
+  </body>
+</html>
