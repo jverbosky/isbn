@@ -13,19 +13,26 @@
   </header>
   <section>
     <div class="row">
-      <div class="column c1">
-        <img src="/images/i.png" alt="Whoops - image failed to load...">
+      <div class="column">
+        <div>
+          <img src="/images/i.png" alt="Whoops - image failed to load...">
+        </div>
       </div>
-      <div class="column c2">
-        <h3>Please enter an ISBN number to evaluate:</h3>
-        <form method="post" action="isbn_results">  <!-- action corresponds to post item in app.rb -->
-          <!-- "text" type == string, "ISBN" is the variable that you can access from app.rb -->
-          <input type="text" name="ISBN">
-          <input type="submit">  <!-- creates a button to submit form data -->
-        </form>
+      <div class="column">
+        <div>
+          <h3>Please enter an ISBN number to evaluate</h3>
+          <form method="post" action="isbn_results">  <!-- action corresponds to post item in app.rb -->
+            <!-- "text" type == string, "ISBN" is the variable that you can access from app.rb -->
+            <input type="text" name="ISBN">
+            <input type="submit">  <!-- creates a button to submit form data -->
+          </form>
+        </div>
       </div>
     </div>
     <%= yield %>  <!-- load unique content from other .erb files -->
+    <div class="row">
+      <p style="position: fixed; bottom: 0; text-align: center">© jverbosky</p>  <!-- copyright text -->
+    </div>
   </section>
   </body>
 </html>
