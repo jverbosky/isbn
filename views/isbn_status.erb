@@ -1,5 +1,10 @@
+<!--
+/views/isbn_status.erb
+- called by "post '/isbn_results' do" in app.rb
+- page primarily populated via layout.erb
+ -->
+
 <div class="row">
   <h3><%= @result %></h3>
   <p>The number you entered <i>(<%= @num %>)</i> is <%= @valid %></p>
 </div>
-

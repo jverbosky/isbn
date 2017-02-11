@@ -7,13 +7,13 @@ require_relative 'isbn_check.rb'  # load Ruby script (same directory)
 
 get '/' do
   @title = "ISBN Validator"  # instance variable for page name and header
-  erb :isbn_input  # load ERB (HTML) file from /views directory
+  erb :isbn_input  # load isbn_input.erb file (mainly a placeholder, populated via layout.erb)
 end
 
-post '/isbn_results' do  # access input from form action
+post '/isbn_results' do  # access input from form's post > action (line 24 of layout.erb)
   @title = "ISBN Validator Results"  # instance variable for page name and header
-  @num = params[:ISBN]  # access input from .erb form's text input (name="ISBN")
+  @num = params[:ISBN]  # params used to access input from post > action (name="ISBN")
   @result = is_too_small?(@num) ? "Congratulations!" : "Sorry..."  # conditional text
   @valid = is_too_small?(@num) ? "a valid ISBN number." : "not a valid ISBN number."  # more conditional text
-  erb :isbn_status
+  erb :isbn_status  # load isbn_status.erb file with ISBN check results output
 end

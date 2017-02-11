@@ -1,4 +1,7 @@
-<!-- views/layout.erb -->
+<!--
+/views/layout.erb
+- used to host common content for ISBN Validator and ISBN Validator Results pages
+-->
 
 <!doctype html>
 <html lang="en">
@@ -6,10 +9,11 @@
     <title>ISBN Validator</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="/images/favicon.ico?" type="image/x-icon">  <!-- added to get favicon to load -->
   </head>
   <body>
   <header>
-    <h1><%= @title %></h1>   <!-- using instance variable for title -->
+    <h1><%= @title %></h1>   <!-- instance variable for title -->
   </header>
   <section>
     <div class="row">
@@ -21,10 +25,9 @@
       <div class="column">
         <div>
           <h3>Please enter an ISBN number to evaluate</h3>
-          <form method="post" action="isbn_results">  <!-- action corresponds to post item in app.rb -->
-            <!-- "text" type == string, "ISBN" is the variable that you can access from app.rb -->
-            <input type="text" name="ISBN">
-            <input type="submit">  <!-- creates a button to submit form data -->
+          <form method="post" action="isbn_results">  <!-- action ~ "post '/isbn_results' do" in app.rb -->
+            <input type="text" name="ISBN">  <!-- text == string, name ~ "@num = params[:ISBN]" in app.rb -->
+            <input type="submit">  <!-- button to submit form data -->
           </form>
         </div>
       </div>
