@@ -14,7 +14,5 @@ post '/isbn_results' do  # route that accesses input from form's post > action (
   @title = "ISBN Validator Results"  # instance variable for page name and header
   @num = params[:ISBN]  # params used to access input from post > action (name="ISBN")
   @status = is_too_small?(@num)  # ISBN validation status after evaluation via isbn_check.rb
-  @result = @status ? "Congratulations!" : "Sorry..."  # conditional text
-  @valid = @status ? "a valid ISBN number." : "not a valid ISBN number."  # more conditional text
   erb :isbn_status  # load isbn_status.erb file with ISBN check results output
 end
