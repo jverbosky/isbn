@@ -2,7 +2,7 @@
 # just use app.rb file to get/post, don't put a lot of logic here
 
 require 'sinatra'
-require 'sinatra/reloader' if development?  # automatically reload app.rb on save via sinatra-contrib gem
+# require 'sinatra/reloader' if development?  # automatically reload app.rb on save via sinatra-contrib gem
 require_relative 'isbn_check.rb'  # load Ruby script (same directory)
 
 get '/' do  # route to load the ISBN Validator page
